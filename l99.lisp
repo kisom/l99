@@ -30,12 +30,34 @@
 ;;;    Example:
 ;;;    * (element-at '(a b c d e) 3)
 ;;;    C
+(defun p03 (lst k)
+  (let ((k (- k 1)))
+    (cond
+      ((null lst) nil)
+      ((zerop k)  (if (null lst)
+		      nil
+		      (first lst)))
+      (t (p03 (rest lst) k)))))
 
 ;;; Problem 4
 ;;; (*) Find the number of elements of a list.
+(defun p04 (lst)
+  "Find the number of elements of a list."
+  (labels ((internal-length (lst n)
+	     (if (null lst)
+		 n
+		 (internal-length (rest lst) (+ n 1)))))
+    (internal-length lst 0)))
 
 ;;; Problem 5
 ;;; (*) Reverse a list.
+(defun p05 (lst)
+  (labels ((rev (lst acc)
+	     (if (null lst)
+		 acc
+		 (rev (rest lst)
+		      (cons (first lst) acc)))))
+    (rev lst nil)))
 
 ;;; Problem 6
 ;;; (*) Find out whether a list is a palindrome.
